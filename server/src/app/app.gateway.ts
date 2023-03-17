@@ -9,7 +9,7 @@ import {
 import { Server, Socket } from 'socket.io';
 
 /* Decorator with port and cors properties */
-@WebSocketGateway(80, {
+@WebSocketGateway(82, {
   cors: {
     origin: '*',
   },
