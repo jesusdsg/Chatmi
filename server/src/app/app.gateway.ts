@@ -19,7 +19,7 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
 
   afterInit(server: any) {
-    console.log('Server is ', server);
+    console.log('Server started');
   }
 
   handleConnection(client: any, ...args: any[]) {
@@ -41,6 +41,7 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
     payload: { room: string; message: string },
   ) {
     const { room, message } = payload;
+    console.log('Message ', payload);
     this.server.to(`room_${room}`).emit('new_message', message);
   }
 
