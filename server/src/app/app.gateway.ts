@@ -32,6 +32,7 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   /* When users joins to the room */
   @SubscribeMessage('event_join') handleJoinRoom(client: Socket, room: string) {
+    console.log('Joined to room_', room);
     client.join(`room_'${room}`);
   }
 
