@@ -16,10 +16,11 @@ export default function ChatFooter({
     if (!!room) {
       const body = {
         room: room.name,
-        message,
+        body: message,
+        from: "Me",
       };
       socket.emit("event_message", body);
-      setMessages([...messages, message]);
+      setMessages([body, ...messages]);
       setMessage("");
     }
   };

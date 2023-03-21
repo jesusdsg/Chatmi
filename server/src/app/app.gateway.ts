@@ -32,18 +32,23 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   /* When users joins to the room */
   @SubscribeMessage('event_join') handleJoinRoom(client: Socket, room: string) {
-    console.log('Joined to room_', room);
+    console.log('Joined to room_' + room);
     client.join(`room_'${room}`);
   }
 
   /* When someone write a new message */
-  @SubscribeMessage('event_message') handleIncommingMessage(
-    client: Socket,
-    payload: { room: string; message: string },
+  @SubscribeMessage('event_message') //TODO Backend
+  handleIncommingMessage(
+    socket: Socket,
+    payload: { room: string; body: string },
   ) {
-    const { room, message } = payload;
-    console.log('Message ', payload);
-    this.server.to(`room_${room}`).emit('new_message', message);
+    const { room, body } = payload;
+    console.log(payload);
+    this.server.to(`room_${room}`).emit('new_message', {
+      body: body,
+      from: socket.id,
+    });
+    this.server.emit('new_message', { body: body, from: socket.id });
   }
 
   /* When someone leaves the room */

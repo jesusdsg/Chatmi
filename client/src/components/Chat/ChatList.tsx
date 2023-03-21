@@ -43,8 +43,10 @@ export default function ChatList({
   const handleJoinRoom = (room: string) => {
     socket.emit("event_join", room);
   };
-  const handleLeaveRoom = (room: string) => {
-    socket.emit("event_leave", room);
+  const handleLeaveRoom = (room: { name: string }) => {
+    if (!!room) {
+      socket.emit("event_leave", room.name);
+    }
   };
 
   return (
