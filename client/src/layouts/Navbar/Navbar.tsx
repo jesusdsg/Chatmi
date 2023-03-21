@@ -4,7 +4,7 @@ import "./Navbar.scss";
 import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-dark-2 px-20 py-4">
+    <nav className="flex items-center justify-between flex-wrap bg-dark-1 px-20 py-4">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <Link to="/">
           <img src={Logo} className="logo" alt="app logo"></img>
@@ -46,7 +46,7 @@ export default function Navbar() {
         <div>
           <Link
             to="/chat"
-            className="inline-block text-sm px-4 py-2 leading-none border rounded-sm text-white border-white hover:border-transparent hover:text-white hover:bg-green-1 mt-4 lg:mt-0 duration-300 hover:shadow-lg uppercase hover:shadow-green-1/50"
+            className="inline-block text-sm px-4 py-2 leading-none border rounded-md text-white border-white hover:border-transparent hover:text-white hover:bg-green-1 mt-4 lg:mt-0 duration-300 hover:shadow-lg uppercase hover:shadow-green-1/50 hover:border-green-2"
           >
             Start chat
           </Link>

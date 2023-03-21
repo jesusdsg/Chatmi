@@ -9,15 +9,17 @@ export default function Chat({ socket }: any) {
   const [activeRoom, setActiveRoom] = useState(null);
   return (
     <Layout>
-      <div className="flex h-96">
-        <div className="w-2/5">
+      <div className="grid md:flex lg:flex h-96">
+        <div className="w-full md:w-3/5 lg:w-2/5">
           <ChatList
             socket={socket}
             activeRoom={activeRoom}
             setActiveRoom={setActiveRoom}
+            messages={messages}
+            setMessages={setMessages}
           />
         </div>
-        <div className="w-3/5">
+        <div className="w-full md:w-3/5 lg:w-3/5">
           <ChatBody messages={messages} />
           <ChatFooter
             socket={socket}

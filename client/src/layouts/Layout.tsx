@@ -9,7 +9,7 @@ export default function Layout({ children }: ReactProps) {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="py-4 px-20">{children}</div>
+      <div className="py-4 px-2 md:px-20 lg:px-20">{children}</div>
     </div>
   );
 }

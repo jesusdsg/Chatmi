@@ -25,7 +25,7 @@ export default function ChatFooter({
   };
 
   return (
-    <div className="px-8 py-4 bg-dark-2 w-full rounded-b-sm border-t border-dark-3 h-1/4">
+    <div className="px-4 md:px-8 lg:px-8 py-4 bg-dark-1 w-full rounded-br-md border-t border-dark-2 h-20 md:h-1/4 lg:h-1/4">
       <form className="flex gap-2 m-auto items-center">
         <div className="w-3/4">
           <input
@@ -43,8 +43,8 @@ export default function ChatFooter({
             className="bg-green-1 hover:bg-green-2 duration-300 px-8 py-2 border-none rounded-sm w-auto  hover:shadow-md flex items-center gap-2 focus:outline-none"
             onClick={(e) => sendMessage(e)}
           >
-            Send
-            <BiPaperPlane size="1.2rem" />
+            <span className="hidden md:block lg:block">Send</span>
+            <BiPaperPlane size="1.5rem" />
           </button>
         </div>
       </form>
