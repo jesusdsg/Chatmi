@@ -9,7 +9,7 @@ export default function Chat({ socket }: any) {
   const [activeRoom, setActiveRoom] = useState(null);
   return (
     <Layout>
-      <div className="flex">
+      <div className="flex h-96">
         <div className="w-2/5">
           <ChatList
             socket={socket}
