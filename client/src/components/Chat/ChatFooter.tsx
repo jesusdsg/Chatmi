@@ -32,7 +32,7 @@ export default function ChatFooter({
           <input
             type="text"
             name="message"
-            className="text-white rounded-sm bg-dark-2 px-6 py-2 border border-dark-3 w-full focus:outline-none focus:border-green-1 duration-300 hover:border-green-2"
+            className="text-white rounded-md bg-dark-2 px-6 py-2 border border-dark-3 w-full focus:outline-none focus:border-green-1 duration-300 hover:border-green-2"
             onChange={(e) => handleChange(e)}
             placeholder="Write a message..."
             value={message}
@@ -41,7 +41,7 @@ export default function ChatFooter({
         <div className="w-1/4">
           <button
             type="submit"
-            className="bg-green-1 hover:bg-green-2 duration-300 px-8 py-2 border-none rounded-sm w-auto  hover:shadow-md flex items-center gap-2 focus:outline-none"
+            className="bg-green-1 hover:bg-green-2 duration-300 px-8 py-2 border-none rounded-md w-auto  hover:shadow-md flex items-center gap-2 focus:outline-none"
             onClick={(e) => sendMessage(e)}
           >
             <span className="hidden md:block lg:block">Send</span>

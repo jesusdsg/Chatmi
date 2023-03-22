@@ -1,28 +1,31 @@
-import React from "react";
 import {
   FcPodiumWithSpeaker,
   FcSportsMode,
   FcVoicePresentation,
 } from "react-icons/fc";
+import UserImage from "@assets/user.svg";
 
 const rooms = [
   {
-    title: "Sports",
-    name: "sports",
+    title: "King Poppy",
+    name: "king poppy",
     description: "We can talk about the last sport news and trends...",
     icon: <FcSportsMode size="2rem" />,
+    photo: UserImage,
   },
   {
-    title: "Religion",
-    name: "religion",
+    title: "Rufus Lae",
+    name: "rufus lae",
     description: "We can talk about the last sport news and trends...",
     icon: <FcPodiumWithSpeaker size="2rem" />,
+    photo: UserImage,
   },
   {
-    title: "Politics",
-    name: "politics",
+    title: "Tiny Moon",
+    name: "tiny moon",
     description: "We can talk about the last sport news and trends...",
     icon: <FcVoicePresentation size="2rem" />,
+    photo: UserImage,
   },
 ];
 
@@ -31,6 +34,7 @@ interface RoomType {
   name: string;
   description: string;
   icon: any;
+  photo: any;
 }
 
 export default function ChatList({
@@ -52,7 +56,7 @@ export default function ChatList({
   return (
     <div className="bg-green-2 rounded-l-md border-1 border-light-4 py-4 w-full h-full">
       <div className="px-8 py-4">
-        <h3 className="text-xl font-bold">Room List</h3>
+        <h3 className="text-xl font-bold primary-font">Users in this chat</h3>
       </div>
 
       <ul className="overflow-y-scroll md:overflow-auto">
@@ -70,19 +74,38 @@ export default function ChatList({
             >
               {room == activeRoom ? (
                 <div className="flex flex-wrap px-8 py-4 bg-green-1 text-light hover:bg-green-1 duration-300">
-                  <div className="flex gap-2 items-center w-full">
-                    {room.icon} <h3 className="text-xl w-full">{room.title}</h3>
+                  <div className="flex gap-2 items-center">
+                    <img
+                      src={room.photo}
+                      alt="User photo"
+                      className="text-white"
+                    />
+                    <h3 className="text-xl w-full mt-1 font-normal">
+                      {room.name}
+                    </h3>
                   </div>
 
-                  <p className="text-sm text-light-1/80">{room.description}</p>
+                  {/* <div className="flex gap-2 items-center w-full">
+                    {room.icon}
+                    <h3 className="text-xl w-full primary-font">
+                      {room.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-sm text-light-1/80">{room.description}</p> */}
                 </div>
               ) : (
                 <div className="flex flex-wrap px-8 py-4 bg-green-2 text-light hover:bg-green-1 duration-300">
-                  <div className="flex gap-2 items-center w-full">
-                    {room.icon} <h3 className="text-xl w-full">{room.title}</h3>
+                  <div className="flex gap-2 items-center">
+                    <img
+                      src={room.photo}
+                      alt="User photo"
+                      className="text-white"
+                    />
+                    <h3 className="text-xl w-full mt-1 font-normal">
+                      {room.name}
+                    </h3>
                   </div>
-
-                  <p className="text-sm text-light-1/80">{room.description}</p>
                 </div>
               )}
             </li>
