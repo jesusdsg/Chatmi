@@ -4,6 +4,7 @@ import {
   FcVoicePresentation,
 } from "react-icons/fc";
 import UserImage from "@assets/user.svg";
+import uuid from "react-uuid";
 
 const rooms = [
   {
@@ -35,6 +36,7 @@ interface RoomType {
   description: string;
   icon: any;
   photo: any;
+  usersList: any[];
 }
 
 export default function ChatList({
@@ -43,16 +45,8 @@ export default function ChatList({
   setActiveRoom,
   messages,
   setMessages,
+  usersList,
 }: any) {
-  const handleJoinRoom = (room: string) => {
-    socket.emit("event_join", room);
-  };
-  const handleLeaveRoom = (room: { name: string }) => {
-    if (!!room) {
-      socket.emit("event_leave", room.name);
-    }
-  };
-
   return (
     <div className="bg-green-2 rounded-l-md border-1 border-light-4 py-4 w-full h-full">
       <div className="px-8 py-4">
@@ -60,54 +54,21 @@ export default function ChatList({
       </div>
 
       <ul className="overflow-y-scroll md:overflow-auto">
-        {rooms.map((room: RoomType) => {
+        {usersList.map((user: { username: string }) => {
           return (
-            <li
-              key={room.name}
-              className="cursor-pointer"
-              onClick={() => {
-                handleLeaveRoom(activeRoom);
-                setMessages([]);
-                handleJoinRoom(room.name);
-                setActiveRoom(room);
-              }}
-            >
-              {room == activeRoom ? (
-                <div className="flex flex-wrap px-8 py-4 bg-green-1 text-light hover:bg-green-1 duration-300">
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={room.photo}
-                      alt="User photo"
-                      className="text-white"
-                    />
-                    <h3 className="text-xl w-full mt-1 font-normal">
-                      {room.name}
-                    </h3>
-                  </div>
-
-                  {/* <div className="flex gap-2 items-center w-full">
-                    {room.icon}
-                    <h3 className="text-xl w-full primary-font">
-                      {room.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-sm text-light-1/80">{room.description}</p> */}
+            <li key={uuid()} className="cursor-pointer">
+              <div className="flex flex-wrap px-8 py-4 bg-green-2 text-light hover:bg-green-1 duration-300">
+                <div className="flex gap-2 items-center">
+                  <img
+                    src={UserImage}
+                    alt="User photo"
+                    className="text-white"
+                  />
+                  <h3 className="text-xl w-full mt-1 font-normal">
+                    {user.username}
+                  </h3>
                 </div>
-              ) : (
-                <div className="flex flex-wrap px-8 py-4 bg-green-2 text-light hover:bg-green-1 duration-300">
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={room.photo}
-                      alt="User photo"
-                      className="text-white"
-                    />
-                    <h3 className="text-xl w-full mt-1 font-normal">
-                      {room.name}
-                    </h3>
-                  </div>
-                </div>
-              )}
+              </div>
             </li>
           );
         })}

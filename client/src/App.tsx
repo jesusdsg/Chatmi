@@ -13,7 +13,10 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home socket={socket} />}></Route>
-          <Route path="/username" element={<Username />}></Route>
+          <Route
+            path="/username"
+            element={<Username socket={socket} />}
+          ></Route>
           <Route path="/chat" element={<Chat socket={socket} />}></Route>
         </Routes>
       </div>

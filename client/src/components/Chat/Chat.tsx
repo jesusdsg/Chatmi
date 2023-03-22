@@ -1,37 +1,43 @@
 import Layout from "@layouts/Layout";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ChatBody from "./ChatBody";
 import ChatList from "./ChatList";
 import ChatFooter from "./ChatFooter";
 import { userStore } from "src/store/user";
+import { useNavigate } from "react-router-dom";
 
 export default function Chat({ socket }: any) {
   const [messages, setMessages] = useState<any>([]);
   const [activeRoom, setActiveRoom] = useState<any>(null);
-
+  const [usersList, setUsersList] = useState<any>([]);
+  const navigate = useNavigate();
   const username = userStore((state: any) => state.username);
 
   const receiveMessage = (message: any) => {
     console.log("message is ", message);
   };
 
-  useEffect(() => {
-    console.log("Username is ", username);
-    console.log("Sockeeet", socket);
-    //console.log("Aqui", activeRoom);
+  const getUserList = () => {
+    socket.on("user_list", (data: any) => {
+      console.log("d", data);
+      setUsersList(data);
+    });
+  };
+
+  const getMessages = () => {
     socket.on("new_message", (data: any) => {
-      console.log("Meessage", data);
       setMessages([]);
       setMessages([...messages, data]);
     });
-    if (!!activeRoom) {
-      /*  const res = socket.on("event_join", activeRoom.name);
-      console.log("eee", res);
-      socket.on("new_message", (data: any) => {
-        console.log(data);
-      }); */
+  };
+
+  useEffect(() => {
+    getMessages();
+    getUserList();
+
+    if (username == "") {
+      navigate("/username");
     }
-    //socket.on("new_message", receiveMessage);
 
     return () => {
       socket.off("new_message", receiveMessage);
@@ -48,6 +54,7 @@ export default function Chat({ socket }: any) {
             setActiveRoom={setActiveRoom}
             messages={messages}
             setMessages={setMessages}
+            usersList={usersList}
           />
         </div>
         <div className="w-full md:w-3/4 lg:w-3/4">

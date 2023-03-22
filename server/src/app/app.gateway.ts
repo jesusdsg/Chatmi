@@ -18,6 +18,8 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   /* Server instance */
   @WebSocketServer() server: Server;
 
+  userList: any = [];
+
   afterInit(server: any) {
     console.log('Server started');
   }
@@ -40,15 +42,32 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage('event_message') //TODO Backend
   handleIncommingMessage(
     socket: Socket,
-    payload: { room: string; body: string },
+    payload: { from: string; body: string },
   ) {
-    const { room, body } = payload;
+    const { from, body } = payload;
     console.log(payload);
-    this.server.to(`room_${room}`).emit('new_message', {
+    /* this.server.to(`room_${room}`).emit('new_message', {
       body: body,
       from: socket.id,
-    });
-    this.server.emit('new_message', { body: body, from: socket.id });
+    }); */
+    this.server.emit('new_message', { body: body, from });
+  }
+
+  @SubscribeMessage('disconnect_user')
+  handleDisconnectUser(socket: Socket, username: string) {
+    const newList = this.userList.filter(
+      (x: { username: string }) => x.username !== username,
+    );
+    this.userList = newList;
+    this.server.emit('user_list', this.userList);
+  }
+
+  @SubscribeMessage('user_list')
+  handleUserList(socket: Socket, username: any) {
+    console.log('Payload', username);
+    this.userList.push({ username });
+    console.log('Result is ', this.userList);
+    this.server.emit('user_list', this.userList);
   }
 
   /* When someone leaves the room */

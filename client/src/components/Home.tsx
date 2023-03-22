@@ -1,5 +1,4 @@
 import Layout from "@layouts/Layout";
-import React from "react";
 import Logo from "@assets/logo.svg";
 import ChatImage from "@assets/chat.svg";
 function Home({ socket }: any) {
