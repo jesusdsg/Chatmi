@@ -37,11 +37,10 @@ export default function Chat({ socket }: any) {
     if (username == "") {
       navigate("/username");
     }
-
     return () => {
       socket.off("new_message", receiveMessage);
     };
-  }, [socket, activeRoom, messages]);
+  }, [socket, activeRoom, messages, usersList]);
 
   return (
     <Layout>

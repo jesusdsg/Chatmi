@@ -59,7 +59,6 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
       (x: { username: string }) => x.username !== username,
     );
     this.userList = newList;
-    console.log('Disconnecting users', username);
     this.server.emit('user_list', this.userList);
   }
 

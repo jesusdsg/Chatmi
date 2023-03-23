@@ -14,6 +14,16 @@ export default function Navbar() {
     deleteUsername();
     navigate("/");
   };
+
+  /* Perform the disconnect when user closes the app */
+  window.addEventListener("beforeunload", (event) => {
+    event.preventDefault();
+    event.returnValue = "";
+    const socket = socketIO("http://localhost:82");
+    socket.emit("disconnect_user", username);
+    deleteUsername();
+  });
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-dark-1 px-20 py-4">
       <div className="flex items-center flex-shrink-0 text-white mr-6">

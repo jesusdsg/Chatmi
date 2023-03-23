@@ -2,6 +2,8 @@ import { useState } from "react";
 import { HiCheck } from "react-icons/hi";
 import { userStore } from "src/store/user";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+
 export default function Username({ socket }: any) {
   const navigate = useNavigate();
   const [userValue, setUserValue] = useState("");
@@ -12,6 +14,7 @@ export default function Username({ socket }: any) {
     socket.emit("user_list", userValue);
     await socket.on("user_exists", (username: string) => {
       if (username == userValue) {
+        alert("This username already exists");
         navigate("/username");
       }
     });
