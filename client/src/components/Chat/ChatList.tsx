@@ -53,18 +53,18 @@ export default function ChatList({
         <h3 className="text-xl font-bold primary-font">Users in this chat</h3>
       </div>
 
-      <ul className="overflow-y-scroll md:overflow-auto">
+      <ul className="overflow-y-scroll md:overflow-auto h-32 lg:h-auto md:h-auto">
         {usersList.map((user: { username: string }) => {
           return (
             <li key={uuid()} className="cursor-pointer">
-              <div className="flex flex-wrap px-8 py-4 bg-green-2 text-light hover:bg-green-1 duration-300">
+              <div className="flex flex-wrap px-8 py-2 bg-green-2 text-light hover:bg-green-1 duration-300">
                 <div className="flex gap-2 items-center">
                   <img
                     src={UserImage}
                     alt="User photo"
                     className="text-white"
                   />
-                  <h3 className="text-xl w-full mt-1 font-normal">
+                  <h3 className="text-base w-full mt-1 font-normal">
                     {user.username}
                   </h3>
                 </div>
