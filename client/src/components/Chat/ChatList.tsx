@@ -48,7 +48,7 @@ export default function ChatList({
   usersList,
 }: any) {
   return (
-    <div className="bg-green-2 rounded-l-md border-1 border-light-4 py-4 w-full h-full">
+    <div className="bg-green-2 rounded-l-md border-1 border-light-4 py-4 w-full h-full overflow-y-auto">
       <div className="px-8 py-4">
         <h3 className="text-xl font-bold primary-font">Users in this chat</h3>
       </div>

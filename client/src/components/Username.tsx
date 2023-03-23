@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiCheck } from "react-icons/hi";
 import { userStore } from "src/store/user";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,14 @@ export default function Username({ socket }: any) {
   const [userValue, setUserValue] = useState("");
   const setUsername = userStore((state: any) => state.setUsername);
 
-  const hanldeSubmit = () => {
+  const handleSubmit = async () => {
     setUsername(userValue);
     socket.emit("user_list", userValue);
+    await socket.on("user_exists", (username: string) => {
+      if (username == userValue) {
+        navigate("/username");
+      }
+    });
     navigate("/chat");
   };
 
@@ -31,7 +36,7 @@ export default function Username({ socket }: any) {
             <button
               type="submit"
               className="bg-yellow-1 hover:bg-green-2 duration-300 px-2 py-2 mt-2 border-none rounded-md w-auto  hover:shadow-md flex items-center focus:outline-none"
-              onClick={() => hanldeSubmit()}
+              onClick={() => handleSubmit()}
             >
               <HiCheck size="1.5rem" />
             </button>

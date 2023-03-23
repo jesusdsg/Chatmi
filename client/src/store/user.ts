@@ -7,6 +7,10 @@ export const userStore = create((set) => ({
     set({
       username: value,
     }),
+  deleteUsername: () =>
+    set({
+      username: "",
+    }),
   setUsersList: (value: any) =>
     set((state: any) => ({
       usersList: [...state.usersList, { username: value }],

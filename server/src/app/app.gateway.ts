@@ -59,15 +59,21 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
       (x: { username: string }) => x.username !== username,
     );
     this.userList = newList;
+    console.log('Disconnecting users', username);
     this.server.emit('user_list', this.userList);
   }
 
   @SubscribeMessage('user_list')
   handleUserList(socket: Socket, username: any) {
-    console.log('Payload', username);
-    this.userList.push({ username });
-    console.log('Result is ', this.userList);
-    this.server.emit('user_list', this.userList);
+    const exists = this.userList.find(
+      (x: { username: string }) => x.username == username,
+    );
+    if (!!exists) {
+      this.server.emit('user_exists', username);
+    } else {
+      this.userList.push({ username });
+      this.server.emit('user_list', this.userList);
+    }
   }
 
   /* When someone leaves the room */

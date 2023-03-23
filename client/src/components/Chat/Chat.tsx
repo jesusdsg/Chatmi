@@ -19,7 +19,6 @@ export default function Chat({ socket }: any) {
 
   const getUserList = () => {
     socket.on("user_list", (data: any) => {
-      console.log("d", data);
       setUsersList(data);
     });
   };

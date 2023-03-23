@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": {
+    "name": "Jesus Salcedo",
+    "email": "jesalceg@gmail.com",
+    "url": "https://www.jesusdsg.github.io"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
